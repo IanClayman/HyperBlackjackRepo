@@ -5,6 +5,7 @@ using UnityEngine;
 public class Globals : MonoBehaviour {
     [Range(1, 10)]
     public int setTimerTime = 5;
+    public AudioSource buzzer;
 
     public static int p1score = 0;
     public static int p2score = 0;
@@ -14,9 +15,12 @@ public class Globals : MonoBehaviour {
     public static float timerTime;
 
     public bool roundStarted = false;
+    public bool buzzerPlayed = false;
 
 	// Use this for initialization
 	void Start () {
+        Screen.orientation = ScreenOrientation.Portrait;
+
         timerTime = setTimerTime;
 	}
 	
@@ -32,6 +36,13 @@ public class Globals : MonoBehaviour {
         p2score = Mathf.Clamp(p2score, 0, 99);
         p3score = Mathf.Clamp(p3score, 0, 99);
         p4score = Mathf.Clamp(p4score, 0, 99);
+
+        if (timerTime <= 0 && !buzzerPlayed)
+        {
+            buzzer.time = 1.25f;
+            buzzer.Play();
+            buzzerPlayed = true;
+        }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -50,7 +61,23 @@ public class Globals : MonoBehaviour {
     public void ResetTimer()
     {
         timerTime = setTimerTime;
+        buzzerPlayed = false;
         if (!roundStarted)
             roundStarted = true;
+    }
+
+    public void ResetAndPause()
+    {
+        timerTime = setTimerTime;
+        roundStarted = false;
+        buzzerPlayed = false;
+    }
+
+    public void ResetScores()
+    {
+        p1score = 0;
+        p2score = 0;
+        p3score = 0;
+        p4score = 0;
     }
 }

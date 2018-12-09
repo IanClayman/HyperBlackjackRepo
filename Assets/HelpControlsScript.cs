@@ -10,6 +10,8 @@ public class HelpControlsScript : MonoBehaviour {
 
     public GameObject[] helpPages;
 
+    public GameObject settingsMenu;
+
     int currPageIndex = 0;
 
 	// Use this for initialization
@@ -21,6 +23,8 @@ public class HelpControlsScript : MonoBehaviour {
         {
             page.SetActive(false);
         }
+
+        settingsMenu.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -36,6 +40,14 @@ public class HelpControlsScript : MonoBehaviour {
         currPageIndex = 0;
 
         helpPages[currPageIndex].SetActive(true);
+    }
+
+    public void OpenSettingsPage()
+    {
+        helpBackground.SetActive(true);
+        closeHelpButton.SetActive(true);
+
+        settingsMenu.SetActive(true);
     }
 
     public void IncrementIndex()
@@ -71,5 +83,6 @@ public class HelpControlsScript : MonoBehaviour {
 
         helpBackground.SetActive(false);
         closeHelpButton.SetActive(false);
+        settingsMenu.SetActive(false);
     }
 }

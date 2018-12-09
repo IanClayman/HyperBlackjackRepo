@@ -80,4 +80,9 @@ public class Globals : MonoBehaviour {
         p3score = 0;
         p4score = 0;
     }
+
+    public void ChangeTimerTime(int t)
+    {
+        setTimerTime = t;
+    }
 }
